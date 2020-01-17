@@ -80,6 +80,9 @@ if [ -z $INPUT ]; then
     echo "Try '$PROGNAME --help' for more information." 1>&2
     exit 1
 fi
+if [ ! -f $INPUT ]; then
+    exit 1
+fi
 
 
 OUTNAME="audacious.png"
@@ -90,7 +93,8 @@ if [ -z $ASPECT ]; then
     ASPECT=(16 9)
 fi
 resolution=($(identify -format '%w %h' $INPUT))
-if [ ${resolution[0]} -ge $((${resolution[1]}*${ASPECT[0]}/${ASPECT[1]})) ]; then
+height=$((${resolution[1]}*${ASPECT[0]}/${ASPECT[1]}))
+if [ ${resolution[0]} -ge $height ]; then
     resolution[1]=$((${resolution[0]}*${ASPECT[1]}/${ASPECT[0]}))
 else
     resolution[0]=$((${resolution[1]}*${ASPECT[0]}/${ASPECT[1]}))

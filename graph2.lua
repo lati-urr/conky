@@ -27,7 +27,7 @@
   height      - height of the graph, default = 20 pixels
   nb_values   - number of values to display in the graph, default=width
   i.e. 1 pixel for 1 value
-  autoscale   - if set to true, calculate the max valeu of the y axis and
+  autoscale   - if set to true, calculate the max value of the y axis and
   doesn't use the max parameter above, default=false
   skew_x      - skew graph around x axis, défaut = 0
   skew_y      - skew graph around y axis, défaut = 0
@@ -101,83 +101,310 @@ function conky_set_settings()
 	    name="cpu",
 	    arg="cpu0",
 	    max=100,
-      x=600,
+      x=595,
       y=90,
-      width=195,
+      width=200,
       height=60,
-      nb_values=400,
+      nb_values=200,
       foreground=false,
       fg_bd_size=1,
-      fg_bd_colour={{0,0x3bbafd,1},{0.8,0x3bbafd,1},{1,0x000000,0}},
-      fg_colour={{0,0x3bbafd,1},{1,0x127ee1,0.3}},
-      bg_bd_size=0,
-      bg_bd_colour={{0.9,0x3bbafd,0},{1,0x3bbafd,1}},
-      bg_colour={{0,0x303F3F,0},{1,0x303F3F,0.5}},
+      fg_bd_colour={{0,0x3bbafd,1}},
+      bg_colour={{0,0x000000,0},{1,0x000000,0.5}},
     },
     {
 	    name="cpu",
 	    arg="cpu1",
 	    max=100,
-      x=805,
+      x=800,
       y=90,
-      width=195,
+      width=200,
       height=60,
-      nb_values=400,
+      nb_values=200,
       foreground=false,
       fg_bd_size=1,
-      fg_bd_colour={{0,0x3bbafd,1},{0.9,0x3bbafd,1},{1,0x000000,0}},
-      fg_colour={{0,0x3bbafd,0.5},{1,0x127ee1,0.1}},
-      bg_bd_size=0,
-      bg_bd_colour={{0.9,0x3bbafd,0},{1,0x3bbafd,1}},
-      bg_colour={{0,0x303F3F,0},{1,0x303F3F,0.5}},
+      fg_bd_colour={{0,0x3bbafd,1}},
+      bg_colour={{0,0x000000,0},{1,0x000000,0.5}},
     },
     {
 	    name="cpu",
 	    arg="cpu2",
 	    max=100,
-      x=600,
+      x=595,
       y=160,
-      width=195,
+      width=200,
       height=60,
-      nb_values=400,
+      nb_values=200,
       foreground=false,
       fg_bd_size=1,
-      fg_bd_colour={{0,0x3bbafd,1},{0.9,0x3bbafd,1},{1,0x000000,0}},
-      fg_colour={{0,0x3bbafd,0.7},{1,0x127ee1,0.3}},
-      bg_bd_size=0,
-      bg_bd_colour={{0.9,0x3bbafd,0},{1,0x3bbafd,1}},
-      bg_colour={{0,0x303F3F,0},{1,0x303F3F,0.5}},
+      fg_bd_colour={{0,0x3bbafd,1}},
+      bg_colour={{0,0x000000,0},{1,0x000000,0.5}},
     },
     {
 	    name="cpu",
 	    arg="cpu3",
 	    max=100,
-      x=805,
+      x=800,
       y=160,
-      width=195,
+      width=200,
       height=60,
-      nb_values=400,
+      nb_values=200,
       foreground=false,
       fg_bd_size=1,
-      fg_bd_colour={{0,0x3bbafd,1},{0.9,0x3bbafd,1},{1,0x000000,0}},
-      fg_colour={{0,0x3bbafd,1},{1,0x127ee1,1}},
-      bg_bd_size=0,
-      bg_bd_colour={{0.9,0x3bbafd,0},{1,0x3bbafd,1}},
-      bg_colour={{0,0x303F3F,0},{1,0x303F3F,0.5}},
+      fg_bd_colour={{0,0x3bbafd,1}},
+      bg_colour={{0,0x000000,0},{1,0x000000,0.5}},
     },
     {
 	    name="memperc",
 	    arg="",
       max=100,
-      x=600,
+      x=595,
       y=420,
-      width=400,
+      width=405,
       height=100,
-      nb_values=400,
+      nb_values=405,
       foreground=false,
       fg_bd_size=1,
-      fg_bd_colour={{0,0x3bbafd,1},{0.9,0x3bbafd,1},{1,0x5050FF,0}},
-      bg_colour={{0,0x303F3F,0},{1,0x303F3F,0.5}},
+      fg_bd_colour={{0,0x3bbafd,1}},
+      bg_colour={{0,0x000000,0},{1,0x000000,0.5}},
+    },
+    {
+      name="downspeedf",
+      arg="wlp3s0",
+      max=1000,
+      draw_me="${if_existing /sys/class/net/wlp3s0/operstate up}1${endif}",
+      x=0,
+      y=380,
+      autoscale=true,
+      width=290,
+      height=100,
+      bg_colour={{0,0x000000,0},{1,0x000000,0.5}},
+      fg_colour={{0,0x0000ff,0.3},{1,0x0000ff,1}},
+      fg_orientation="ww",
+    },
+    {
+      name="upspeedf",
+      arg="wlp3s0",
+      max=1000,
+      draw_me="${if_existing /sys/class/net/wlp3s0/operstate up}1${endif}",
+      x=300,
+      y=380,
+      autoscale=true,
+      width=290,
+      height=100,
+      bg_colour={{0,0x000000,0},{1,0x000000,0.5}},
+      fg_colour={{0,0x00ff00,0.3},{1,0x00ff00,1}},
+      fg_orientation="ww",
+    },
+    {
+      name="loadavg",
+      arg="1",
+      x=300,
+      y=160,
+      max=10,
+      width=290,
+      height=120,
+      foreground=false,
+      fg_bd_size=1,
+      fg_bd_colour={{1,0xccccff,1}},
+      bg_colour={{0,0x000000,0},{1,0x000000,1}},
+    },
+    {
+      name="loadavg",
+      arg="2",
+      x=300,
+      y=160,
+      max=10,
+      width=290,
+      height=120,
+      foreground=false,
+      background=false,
+      fg_bd_size=1,
+      fg_bd_colour={{1,0x3bbaff,1}},
+      bg_colour={{0,0x303F3F,1},{1,0x303F3F,0.5}},
+    },
+    {
+      name="loadavg",
+      arg="3",
+      x=300,
+      y=160,
+      max=10,
+      width=290,
+      height=120,
+      foreground=false,
+      background=false,
+      fg_bd_size=1,
+      fg_bd_colour={{1,0x0000ff,1}},
+      bg_colour={{0,0x303F3F,1},{1,0x303F3F,0.5}},
+    },
+  }
+  text_settings={
+    {
+      pos={300,28},
+      text='LOAD',
+      size=16,
+    },
+    {
+      pos={0,270},
+      text='NETWORK',
+      size=16,
+    },
+    {
+      pos={360,230},
+      name='loadavg',
+      arg='1',
+      color=0xccccff,
+    },
+    {
+      pos={420,230},
+      name='loadavg',
+      arg='2',
+      color=0x3bbaff,
+    },
+    {
+      pos={480,230},
+      name='loadavg',
+      arg='3',
+      color=0x0000ff,
+    },
+    {
+      pos={695,60},
+      name='cpu',
+      arg='cpu0',
+      size=36,
+      color=0x81fffb,
+      align={'center','middle'},
+    },
+    {
+      pos={900,60},
+      name='cpu',
+      arg='cpu1',
+      size=36,
+      color=0x81fffb,
+      align={'center','middle'},
+    },
+    {
+      pos={695,130},
+      name='cpu',
+      arg='cpu2',
+      size=36,
+      color=0x81fffb,
+      align={'center','middle'},
+    },
+    {
+      pos={900,130},
+      name='cpu',
+      arg='cpu3',
+      size=36,
+      color=0x81fffb,
+      align={'center','middle'},
+    },
+    {
+      pos={797.5,370},
+      name='mem',
+      size=36,
+      color=0x81fffb,
+      align={'center','middle'},
+    },
+    {
+      pos={145,330},
+      name='downspeedf',
+      arg='wlp3s0',
+      unit=' k/s',
+      size=36,
+      color=0x81fffb,
+      align={'center','middle'},
+    },
+    {
+      pos={0,290},
+      text='↓',
+      size=14,
+      align={'left','bottom'},
+      font='IPAPGothic',
+    },
+    {
+      pos={300,290},
+      text='↑',
+      size=14,
+      align={'left','bottom'},
+      font='IPAPGothic',
+    },
+    {
+      pos={445,330},
+      name='upspeedf',
+      arg='wlp3s0',
+      unit=' k/s',
+      size=36,
+      color=0x81fffb,
+      align={'center','middle'},
+    },
+    {
+      pos={290,285},
+      name='totaldown',
+      arg='wlp3s0',
+      size=18,
+      align={'right','bottom'},
+    },
+    {
+      pos={590,285},
+      name='totalup',
+      arg='wlp3s0',
+      size=18,
+      align={'right','bottom'},
+    },
+    {
+      pos={170,420},
+      text='SSID',
+      align={'right','bottom'},
+      size=18,
+    },
+    {
+      pos={170,450},
+      text='QUALITY',
+      align={'right','bottom'},
+      size=18,
+    },
+    {
+      pos={170,480},
+      text='MAC',
+      align={'right','bottom'},
+      size=18,
+    },
+    {
+      pos={170,510},
+      text='LAN IP',
+      align={'right','bottom'},
+      size=18,
+    },
+    {
+      pos={570,420},
+      name='wireless_essid',
+      arg='wlp3s0',
+      align={'right','bottom'},
+      size=14,
+      font='IPAPGothic',
+    },
+    {
+      pos={570,450},
+      name='wireless_link_qual_perc',
+      arg='wlp3s0',
+      warn={60,0xffff00},
+      alert={40,0xff0000},
+      size=18,
+      align={'right','bottom'},
+    },
+    {
+      pos={570,480},
+      name='wireless_ap',
+      arg='wlp3s0',
+      size=18,
+      align={'right','bottom'},
+    },
+    {
+      pos={570,510},
+      name='addrs',
+      arg='wlp3s0',
+      size=18,
+      align={'right','bottom'},
     },
   }
   reload = 1
@@ -281,30 +508,109 @@ function conky_main()
     end
   end
   -- show text
+  extents=cairo_text_extents_t:create()
+  local utf8 = "cairo"
   cairo_select_font_face (cr, font, font_slant, font_face);
-  cairo_set_font_size (cr, 36)
-  cairo_set_source_rgba (cr, 59/255, 255/255, 251/255, 0.8)
-  cairo_move_to (cr,685,70)
-  text = tostring(conky_parse('${cpu cpu1}'))
-  cairo_show_text (cr, text)
-  cairo_move_to (cr,890,70)
-  text = tostring(conky_parse('${cpu cpu2}'))
-  cairo_show_text (cr, text)
-  cairo_move_to (cr,685,140)
-  text = tostring(conky_parse('${cpu cpu3}'))
-  cairo_show_text (cr, text)
-  cairo_move_to (cr,890,140)
-  text = tostring(conky_parse('${cpu cpu4}'))
-  cairo_show_text (cr, text)
-  cairo_move_to (cr,750,390)
-  text = tostring(conky_parse('${mem}'))
-  cairo_show_text (cr, text)
+  cairo_set_source_rgba (cr, 59/255, 186/255, 253/255, 1)
+  cairo_set_font_size (cr, 16)
+  cairo_move_to (cr,335,24)
+  cairo_line_to (cr,590,24)
+  cairo_stroke (cr)
+  cairo_move_to (cr,55,265)
+  cairo_line_to (cr,590,265)
+  cairo_stroke (cr)
+  cairo_move_to (cr,595,530)
+  cairo_line_to (cr,1000,530)
+  cairo_stroke (cr)
+  if text_settings ~= nil then
+    for i in pairs(text_settings) do
+      write_text(cr, text_settings[i])
+    end
+  end
   cairo_destroy(cr)
   cairo_surface_destroy(cs)
 	updates=nil
 	updates_gap=nil
 end
 
+function rgbToRgba(color, alpha)
+  return ((color / 0x10000) % 0x100) / 255.0,
+  ((color / 0x100) % 0x100) / 255.0,
+  (color % 0x100) / 255.0,
+  alpha
+end
+
+function write_text(cr, def)
+  local font = def.font or 'Digital'
+  local fontSize = def.size or 24
+  local fontSlant = CAIRO_FONT_SLANT_NORMAL
+  local fontWeight = CAIRO_FONT_WEIGHT_NORMAL
+  cairo_select_font_face(cr, font, fontSlant, fontWeight)
+  cairo_set_font_size(cr, fontSize)
+  cairo_set_source_rgba(cr, rgbToRgba( def.color or 0x3bbafd, def.alpha or 1))
+  local text
+  if def.text ~= nil then
+    text = def.text
+  else
+    if def.unit == nil then
+      def.unit = ''
+    end
+    value = conky_parse('${' .. (def.name or '') .. ' ' .. (def.arg or '') .. '}')
+    -- if def.warn ~= nil then
+    --   if tonumber(value) <= def.warn[1] then
+    --     cairo_set_source_rgba(cr, rgbToRgba( def.warn[2], def.alpha or 1))
+    --   end
+    -- end
+    -- if def.alert ~= nil then
+    --   if tonumber(value) <= def.alert[1] then
+    --     cairo_set_source_rgba(cr, rgbToRgba( def.alert[2], def.alpha or 1))
+    --   end
+    -- end
+    text = tostring(value) .. def.unit
+  end
+  -- if def.font[2] and def.font[2] % 2 == 1 then
+  --   fontWeight = CAIRO_FONT_WEIGHT_BOLD
+  -- end
+  -- if def.font[2] and def.font[2] / 2 >= 1 then
+  --   fontWeight = CAIRO_FONT_SLANT_ITALIC
+  -- end
+  local x = def.pos[1]
+  local y = def.pos[2]
+  local te = cairo_text_extents_t:create()
+  local fe = cairo_font_extents_t:create()
+  cairo_text_extents(cr, text, te)
+  cairo_font_extents(cr, fe)
+
+  if def.align ~= nil then
+    if def.align[1] == 'right' then
+      x = x - te.width - te.x_bearing
+    elseif def.align[1] == 'center' then
+      x = x - te.width/2 - te.x_bearing
+    end
+
+    if def.align[2] == 'bottom' then
+      y = y - fe.descent
+    elseif def.align[2] == 'middle' then
+      y = y + te.height/2
+    elseif def.align[2] == 'top' then
+      y = y + fe.ascent
+    end
+  end
+
+  cairo_move_to(cr, x, y)
+  cairo_show_text(cr, text)
+  cairo_new_path(cr)
+
+  local boundingBox = {
+    x = x + te.x_bearing,
+    y = y + te.y_bearing,
+    width = te.width,
+    height = te.height,
+    right = x + te.x_bearing + te.width,
+    bottom = y + te.y_bearing + te.height
+  }
+  return boundingBox
+end
 
 function draw_graph(t)
   --drawing function
