@@ -67,23 +67,34 @@ text_elements = {
     font="IPAPGothic",
     size=32,
     color=0x00e5ff,
+    interval=20,
   },
   {
     pos={290,40},
     name='kernel',
     align={'right','middle'},
     size=16,
-  },
-  {
-    pos={30,40},
-    text='KERNEL',
-    align={'left','middle'},
-    size=16,
+    interval=3600,
   },
   {
     pos={290,55},
     name='uptime',
     align={'right','middle'},
+    size=16,
+    interval=5,
+  },
+  {
+    pos={290,420},
+    name='diskio',
+    arg='/dev/nvme0n1p4',
+    align={'right','middle'},
+    size=16,
+    interval=5,
+  },
+  {
+    pos={30,40},
+    text='KERNEL',
+    align={'left','middle'},
     size=16,
   },
   {
@@ -105,11 +116,18 @@ text_elements = {
     size=16,
   },
   {
-    pos={290,420},
-    name='diskio',
-    arg='/dev/nvme0n1p4',
-    align={'right','middle'},
-    size=16,
-  },
-
+    pos={160,200},
+    sh="upower -i $(upower -e | grep BAT1) | grep state | awk '{print $2}'",
+    font='Font Awesome',
+    align={'center','middle'},
+    size=36,
+    color=0x00e5ff,
+    interval=5,
+    operator={
+      discharging = '',
+      charging = '',
+      fullycharged = '',
+      default = '?',
+    },
+  }
 }
