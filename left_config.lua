@@ -131,3 +131,50 @@ text_elements = {
     },
   }
 }
+audacious_elements = {
+  audacious = {
+    pos={0,545},
+    text='audacious',
+    align={'left','center'},
+    size=16,
+  },
+  status = {
+    pos={30,940},
+    font='Font Awesome',
+    text='',
+    align={'left','top'},
+    size=48,
+  },
+  title = {
+    pos={320,930},
+    font='IPAPGothic',
+    size=20,
+    sh='audtool current-song',
+    align={'center','middle'},
+  },
+  artist = {
+    pos={640,950},
+    font='IPAPGothic',
+    size=14,
+    sh='audtool current-song-tuple-data artist',
+    align={'right','middle'},
+  },
+  time = {
+    pos={640,970},
+    sh='echo $(audtool current-song-output-length) / $(audtool current-song-length)',
+    align={'right','middle'},
+    size=18,
+  },
+  -- length = {
+  --   pos={640,780},
+  --   sh='',
+  --   align={'right','middle'},
+  -- },
+  image = {
+    x = 0,
+    y = 550,
+    h = 360,
+    w = 640,
+    file = '/tmp/audacious.png',
+  }
+}

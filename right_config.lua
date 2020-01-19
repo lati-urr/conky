@@ -140,8 +140,18 @@ function conky_set_settings()
   }
   text_settings={
     {
-      pos={300,16},
+      pos={300,14},
       text='LOAD',
+      size=16,
+    },
+    {
+      pos={600,14},
+      text='CPU',
+      size=16,
+    },
+    {
+      pos={600,295},
+      text='MEM',
       size=16,
     },
     {
@@ -255,31 +265,31 @@ function conky_set_settings()
       interval=10,
     },
     {
-      pos={170,420},
+      pos={170,410},
       text='SSID',
       align={'right','bottom'},
       size=18,
     },
     {
-      pos={170,450},
+      pos={170,440},
       text='QUALITY',
       align={'right','bottom'},
       size=18,
     },
     {
-      pos={170,480},
+      pos={170,470},
       text='MAC',
       align={'right','bottom'},
       size=18,
     },
     {
-      pos={170,510},
+      pos={170,500},
       text='LAN IP',
       align={'right','bottom'},
       size=18,
     },
     {
-      pos={570,420},
+      pos={470,410},
       name='wireless_essid',
       arg='wlp3s0',
       align={'right','bottom'},
@@ -288,7 +298,7 @@ function conky_set_settings()
       interval=5,
     },
     {
-      pos={570,450},
+      pos={470,440},
       name='wireless_link_qual_perc',
       arg='wlp3s0',
       warn={60,0xffff00},
@@ -298,7 +308,7 @@ function conky_set_settings()
       interval=5,
     },
     {
-      pos={570,480},
+      pos={470,470},
       name='wireless_ap',
       arg='wlp3s0',
       size=18,
@@ -306,12 +316,21 @@ function conky_set_settings()
       interval=30,
     },
     {
-      pos={570,510},
+      pos={470,500},
       name='addrs',
       arg='wlp3s0',
       size=18,
       align={'right','bottom'},
       interval=30,
+    },
+  }
+  image_settings = {
+    {
+      x=0,
+      y=0,
+      h=230,
+      w=290,
+      file='/tmp/forecast.jpg',
     },
   }
 end

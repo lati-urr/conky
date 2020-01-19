@@ -1,3 +1,5 @@
+require 'imlib2'
+
 function hexa_to_rgb(color, alpha)
   -- ugh, whish this wans't an oneliner
   return ((color / 0x10000) % 0x100) / 255.,
@@ -38,7 +40,6 @@ function write_text(cr, def, updates)
     else
       if def.text ~= nil then
         def.cache = def.text
-        def.interval = 3600
       else
         if def.unit == nil then
           def.unit = ''
@@ -125,7 +126,6 @@ function image (im)--
 	else
 		height = tonumber (h)
 	end
-
 	imlib_context_set_image (show)
 	local scaled = imlib_create_cropped_scaled_image (0, 0,
                                                     imlib_image_get_width (),
