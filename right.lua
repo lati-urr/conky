@@ -1,4 +1,5 @@
 require 'cairo'
+package.path = package.path .. ';' .. os.getenv("HOME") .. '/.config/conky/?.lua'
 require 'text'
 require 'right_config'
 
@@ -35,7 +36,7 @@ function conky_main()
   updates=tonumber(conky_parse('${updates}'))
   --start drawing after "updates_gap" updates
   --prevent segmentation error for cpu
-  updates_gap = 1
+  updates_gap = 2
   if conky_start == 1 then
     conky_set_settings()
     flagOK = 0
@@ -120,12 +121,25 @@ function conky_main()
   cairo_move_to (cr,335,12)
   cairo_line_to (cr,590,12)
   cairo_stroke (cr)
-  cairo_move_to (cr,55,250)
-  cairo_line_to (cr,590,250)
+  cairo_move_to (cr,627,12)
+  cairo_line_to (cr,1000,12)
+  cairo_stroke (cr)
+  cairo_move_to (cr,627,293)
+  cairo_line_to (cr,1000,293)
+  cairo_stroke (cr)
+  cairo_move_to (cr,55,248)
+  cairo_line_to (cr,590,248)
   cairo_stroke (cr)
   cairo_move_to (cr,595,515)
   cairo_line_to (cr,1000,515)
   cairo_stroke (cr)
+
+  -- show image
+  if image_settings ~= nil then
+    for i in pairs(image_settings) do
+      image(image_settings[i])
+    end
+  end
   cairo_destroy(cr)
   cairo_surface_destroy(cs)
 end

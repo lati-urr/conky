@@ -1,7 +1,7 @@
 require 'cairo'
 package.path = package.path .. ';' .. os.getenv("HOME") .. '/.config/conky/?.lua'
-require 'left_config'
 require 'text'
+require 'left_config'
 
 function get_conky_value(conky_value, is_number)
   -- evaluate a conky template to get its current value
@@ -785,6 +785,38 @@ function conky_main()
       write_text(display, text_elements[i], updates)
     end
     conky_start = nil
+  end
+
+  -- audacious
+  local music_status = io.popen('audtool playback-status'):read("*a")
+  music_status = string.gsub(music_status, "\n", "")
+  if music_status ~= '' then
+    cairo_set_line_width(display, 2)
+    cairo_move_to (display,65,543)
+    cairo_line_to (display,640,543)
+    cairo_stroke (display)
+    local status_icon = {
+      playing = '',
+      paused = '',
+      stoppped = '',
+    }
+    audacious_elements['status']['text'] = status_icon[music_status]
+
+    for i in pairs(audacious_elements) do
+      if i == 'image' then
+        local path = io.popen('ls /tmp | grep audacious-temp'):read("*a")
+        path = string.gsub(path, "\n", "")
+        if path ~= '' then
+          command = '~/.config/conky/aspect.sh /tmp/' .. path .. ' -o /tmp'
+          if os.execute() == 1 and updates % 3 == 0 then
+            os.execute(tostring(command))
+          end
+          image(audacious_elements['image'])
+        end
+      else
+        write_text(display, audacious_elements[i], updates)
+      end
+    end
   end
   cairo_destroy(display)
   cairo_surface_destroy(surface)
