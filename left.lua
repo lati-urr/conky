@@ -778,6 +778,12 @@ function conky_main()
       element.draw_function(display, element)
     end
   end
+  -- show line
+  cairo_set_line_width(display, 2)
+  cairo_set_source_rgba(display, hexa_to_rgb(0x3bbafd,1))
+  cairo_move_to (display,50,12)
+  cairo_line_to (display,640,12)
+  cairo_stroke (display)
   -- show text
   extents=cairo_text_extents_t:create()
   if text_elements ~= nil then
@@ -803,15 +809,12 @@ function conky_main()
     audacious_elements['status']['text'] = status_icon[music_status]
 
     for i in pairs(audacious_elements) do
-      if i == 'image' then
+      if i == 'thumbnail' then
         local path = io.popen('ls /tmp | grep audacious-temp'):read("*a")
         path = string.gsub(path, "\n", "")
         if path ~= '' then
-          command = '~/.config/conky/aspect.sh /tmp/' .. path .. ' -o /tmp'
-          if os.execute() == 1 and updates % 3 == 0 then
-            os.execute(tostring(command))
-          end
-          image(audacious_elements['image'])
+          audacious_elements['thumbnail']['file'] = '/tmp/' .. path
+          image(audacious_elements['thumbnail'])
         end
       else
         write_text(display, audacious_elements[i], updates)

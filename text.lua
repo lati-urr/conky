@@ -98,42 +98,53 @@ function write_text(cr, def, updates)
   return boundingBox
 end
 
-function image (im)--
-	x = nil
-	x = (im.x or 0)
-	y = nil
-	y = (im.y or 0)
-	w = nil
-	w = (im.w or 0)
-	h = nil
-	h = (im.h or 0)
-	file = nil
-	file = tostring (im.file)
-	if file == nil then print ("set image file") end
-	---------------------------------------------
-	local show = imlib_load_image (file)
+function image (im)
+  local x = (im.x or 0)
+  local y = (im.y or 0)
+	local w = (im.w or 0)
+	local h = (im.h or 0)
+	local file = tostring (im.file) or nil
+	if file ~= nil then
+    local show = imlib_load_image (file)
+    if show == nil then return end
+    imlib_context_set_image (show)
+    if im.align == 'center' then
+      width = imlib_image_get_width ()
+      height = imlib_image_get_height ()
+      local aspect_width = height*w/h
+      if width <= aspect_width then
+        -- 縦長
+        width = width * h / height
+        height = tonumber (h)
+        x = x + (w-width)/2
+      else
+        -- 横長
+        height = height * w / width
+        width = tonumber (w)
+        y = y + (h-height)/2
+      end
+    else
+      if tonumber (w) == 0 then
+        width = imlib_image_get_width ()
+      else
+        width = tonumber (w)
+      end
 
-	if show == nil then return end
-	imlib_context_set_image (show)
-	if tonumber (w) == 0 then
-		width = imlib_image_get_width ()
-	else
-		width = tonumber (w)
-	end
-
-	if tonumber (h) == 0 then
-		height = imlib_image_get_height ()
-	else
-		height = tonumber (h)
-	end
-	imlib_context_set_image (show)
-	local scaled = imlib_create_cropped_scaled_image (0, 0,
-                                                    imlib_image_get_width (),
-                                                    imlib_image_get_height (),
-                                                    width, height)
-	imlib_free_image ()
-	imlib_context_set_image (scaled)
-	imlib_render_image_on_drawable (x, y)
-	imlib_free_image ()
-	show = nil
+      if tonumber (h) == 0 then
+        height = imlib_image_get_height ()
+      else
+        height = tonumber (h)
+      end
+    end
+    imlib_context_set_image (show)
+    local scaled = imlib_create_cropped_scaled_image (0, 0,
+                                                      imlib_image_get_width (),
+                                                      imlib_image_get_height (),
+                                                      width, height)
+    imlib_free_image ()
+    imlib_context_set_image (scaled)
+    imlib_render_image_on_drawable (x, y)
+    imlib_free_image ()
+    show = nil
+  end
 end

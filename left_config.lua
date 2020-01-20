@@ -5,29 +5,6 @@
 
 elements = {
   {
-    kind = 'bar_graph',
-    conky_value = 'fs_used_perc /home/',
-    from = {x = 30, y = 400},
-    to = {x = 320, y = 400},
-
-    background_thickness = 10,
-    background_color = 0x00E5FF,
-
-    bar_thickness = 10,
-    bar_color = 0x00E5FF,
-
-    critical_threshold = 80,
-
-    change_color_on_critical = true,
-    change_thickness_on_critical = true,
-
-    background_color_critical = 0xFFA0A0,
-    background_thickness_critical = 10,
-
-    bar_color_critical = 0xFF0000,
-    bar_thickness_critical = 13,
-  },
-  {
     kind = 'ring_graph',
     center = {x = 160, y = 200},
     conky_value = 'battery_percent BAT0',
@@ -57,9 +34,44 @@ elements = {
     bar_thickness=10,
     background_thickness=10,
   },
+  {
+    kind = 'bar_graph',
+    conky_value = 'fs_used_perc /home/',
+    from = {x = 30, y = 400},
+    to = {x = 320, y = 400},
+
+    background_thickness = 10,
+    background_color = 0x00E5FF,
+
+    bar_thickness = 10,
+    bar_color = 0x00E5FF,
+
+    critical_threshold = 80,
+
+    change_color_on_critical = true,
+    change_thickness_on_critical = true,
+
+    background_color_critical = 0xFFA0A0,
+    background_thickness_critical = 10,
+
+    bar_color_critical = 0xFF0000,
+    bar_thickness_critical = 13,
+  },
 }
 
 text_elements = {
+  {
+    pos={0,10},
+    text='system',
+    align={'left','middle'},
+    size=16,
+  },
+  {
+    pos={520,220},
+    sh='date "+%H:%M:%S"',
+    align={'center','middle'},
+    size=70,
+  },
   {
     pos={160,290},
     sh='~/.config/conky/battery.sh',
@@ -83,14 +95,14 @@ text_elements = {
     size=16,
     interval=5,
   },
-  {
-    pos={290,420},
-    name='diskio',
-    arg='/dev/nvme0n1p4',
-    align={'right','middle'},
-    size=16,
-    interval=5,
-  },
+  -- {
+  --   pos={290,420},
+  --   name='diskio',
+  --   arg='/dev/nvme0n1p4',
+  --   align={'right','middle'},
+  --   size=16,
+  --   interval=5,
+  -- },
   {
     pos={30,40},
     text='KERNEL',
@@ -109,12 +121,12 @@ text_elements = {
     align={'left','middle'},
     size=16,
   },
-  {
-    pos={30,420},
-    text='R/W',
-    align={'left','middle'},
-    size=16,
-  },
+  -- {
+  --   pos={30,420},
+  --   text='R/W',
+  --   align={'left','middle'},
+  --   size=16,
+  -- },
   {
     pos={160,200},
     sh="upower -i $(upower -e | grep BAT1) | grep state | awk '{print $2}'",
@@ -165,16 +177,12 @@ audacious_elements = {
     align={'right','middle'},
     size=18,
   },
-  -- length = {
-  --   pos={640,780},
-  --   sh='',
-  --   align={'right','middle'},
-  -- },
-  image = {
+  thumbnail = {
     x = 0,
     y = 550,
     h = 360,
     w = 640,
-    file = '/tmp/audacious.png',
+    align = 'center',
+    file = '',
   }
 }

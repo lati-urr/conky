@@ -140,6 +140,7 @@ function conky_main()
       image(image_settings[i])
     end
   end
+
   cairo_destroy(cr)
   cairo_surface_destroy(cs)
 end
